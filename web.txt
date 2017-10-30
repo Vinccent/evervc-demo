@@ -1,0 +1,2305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+ <head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <title>
+   课外课管理平台 - 天天投 - 专业高效的免费投融资服务平台
+  </title>
+  <meta content="课外课管理平台  教育" name="keywords"/>
+  <meta content="课外课管理平台 教育培训机构的SaaS" name="description"/>
+  <meta content="ie=8" http-equiv="x-ua-compatible"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="tx3Dwx58p0" name="baidu-site-verification"/>
+  <link href="/images/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+  <link href="/css/boot-css/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css"/>
+  <link href="/css/boot-css/bootstrap-theme.min.css" media="screen" rel="stylesheet" type="text/css"/>
+  <link href="/css/boot-css/bootstrap.comm.css?975" media="screen" rel="stylesheet" type="text/css"/>
+  <link href="/css/boot-css/bootstrap.custom.css?973" media="screen" rel="stylesheet" type="text/css"/>
+  <link href="/css/boot-fonts/css/font-awesome.min.css" media="screen" rel="stylesheet" type="text/css"/>
+  <script src="/js/jquery/jquery-1.11.1.min.js">
+  </script>
+  <script src="/css/boot-js/bootstrap.min.js">
+  </script>
+  <script src="/js/jquery/jquery.validate.min.js">
+  </script>
+  <script src="/js/jquery/jquery.form.js">
+  </script>
+  <script src="/js/jquery/jquery.cookie.js">
+  </script>
+  <script src="/js/jquery/evervc/jquery.loginPanel.js?97">
+  </script>
+  <script>
+   $(document).ready(function () {
+        // header
+        $(".require-auth").loginPanel();
+
+        var evTimeout = null;
+        $("#header .dropdown").mouseenter(function(){
+            $(this).find(".dropdown-menu").slideDown(200);
+            if(evTimeout != null) {
+                clearTimeout(evTimeout);
+                evTimeout = null;
+            }
+        }).mouseleave(function(){
+            var el = $(this);
+            if(evTimeout != null) {
+                clearTimeout(evTimeout);
+                evTimeout = null;
+            }
+            evTimeout = setTimeout(function () {
+                el.find(".dropdown-menu").slideUp(200);
+                evTimeout = null;
+            }, 100);
+        });
+
+
+        // 退出时清理cookie
+        $("a._btn_logout").click(function(e){
+            $.removeCookie('access_token', { path:'/' });
+            $.removeCookie('user_id', { path:'/' });
+        });
+
+    });
+  </script>
+  <script>
+   var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?b8afd1353ddcc6a6e3630d282272fa54";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+  <link href="/js/jquery/fancybox/jquery.fancybox.css" media="screen" rel="stylesheet" type="text/css"/>
+  <link href="/js/jquery/fancybox/helpers/jquery.fancybox-buttons.css" media="screen" rel="stylesheet" type="text/css"/>
+  <link href="/js/jquery/fancybox/helpers/jquery.fancybox-thumbs.css" media="screen" rel="stylesheet" type="text/css"/>
+  <script src="/js/jquery/bootstrap-select.min.js">
+  </script>
+  <script src="/js/jquery/hchart/highcharts.js">
+  </script>
+  <script src="/js/jquery/hchart/modules/treemap.js">
+  </script>
+  <script src="/js/jquery/jquery.scrollTo.min.js">
+  </script>
+  <script src="/js/jquery/fancybox/jquery.fancybox.pack.js?97" type="text/javascript">
+  </script>
+  <script src="/js/jquery/fancybox/helpers/jquery.fancybox-buttons.js?97" type="text/javascript">
+  </script>
+  <script src="/js/jquery/fancybox/helpers/jquery.fancybox-media.js?97" type="text/javascript">
+  </script>
+  <script src="/js/jquery/fancybox/helpers/jquery.fancybox-thumbs.js?97" type="text/javascript">
+  </script>
+  <script>
+   $(document.body).ready(function () {
+            var startupId = $('body').attr('data-value');
+            function showChart(data) {
+                var chart = new Highcharts.Chart({
+                    chart: {
+                        marginTop:'25',
+                        marginBottom: '130',
+                        renderTo: 'container_analysis',
+                        style: {
+                            fontFamily: ['Helvetica Neue','Helvetica','Arial','Microsoft Yahei','Hiragino Sans GB','Heiti SC','WenQuanYi Micro Hei','sans-serif']
+                        }
+                    },
+                    title: {
+                        text: null
+                    },
+                    colors: ['#ff8c8e', '#f59b64', '#b2d85a', '#7bceeb', '#cc98e6',
+                        '#fa8384', '#db8ba3', '#cfc068', '#85c2a9', '#ffa95d', '#d1b15f', '#9da0e6', '#7ba4e4'],
+                    xAxis: [{
+                    categories:['人工智能','大数据','VR/AR','文化娱乐','消费升级','网红经济','体育健身','企业服务','医疗健康','金融','电商','教育','汽车交通','房产','农业','物联网','智能硬件','智能家居','物流','旅游','游戏','广告营销','O2O','社交','工具软件'],
+                        crosshair: true,
+                        lineColor:"#e5e5e5",
+                        tickColor:"#e5e5e5",
+                        labels: {
+                            rotation: -45
+                        }
+                    }],
+                    yAxis: [{ // Primary yAxis
+                        max:100,
+                        min:0,
+                        gridLineColor:"#e5e5e5",
+                        lineWidth:1,
+                        lineColor:"#e5e5e5",
+                        labels: {
+                            enabled: false
+                        },
+                        title: {
+                            text: null
+                        }
+                    }, { // Secondary yAxis
+                        title: null,
+                        gridLineColor:"#e5e5e5",
+                        gridLineWidth:0,
+                        labels: {
+                            format: '{value}',
+                            style: {
+                                color: '#606060'
+                            }
+                        }
+                    }],
+                    labels:{
+                        items:[
+                            {
+                                html:'<p>投资事件<p>',
+                                style: {
+                                    color: "#606060",
+                                    top: '-25px',
+                                    left:'0px'
+                                }
+                            }
+                        ]
+                    },
+                    tooltip: {
+                        formatter: function () {
+                            if(this.percentage==undefined){
+                                return '<b>' + this.x + '</b><br/>' + this.series.name + ': ' + this.y + '%<br/>'
+                            }else{
+                                return '<b>' + this.x + '</b><br/>' +
+                                        this.series.name + ': ' + this.y + '<br/>' +
+                                        '总数: ' + this.point.stackTotal;
+                            }
+                        }
+                    },
+                    plotOptions: {
+                        column: {
+                            stacking: 'normal'
+                        }
+                    },
+                    legend: {
+                        align: 'left',
+                        x: 0,
+                        verticalAlign: 'bottom',
+                        y: 0,
+                        floating: true,
+                        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF',
+                        itemStyle:{
+                            fontWeight:'normal'
+                        },
+                        itemMarginBottom:5,
+                        itemMarginTop:5
+                    },
+                    series: data,
+                    credits:{
+                        href:"http://www.evervc.com",
+                        text:"数据来源：天天投",
+                        style: {
+                            color: '#bbb'
+                        }
+                    }
+                });
+            }
+            var getForm = function(param,isFirstTime){
+                //使用JQuery从后台获取JSON格式的数据
+                return jQuery.get("/api/chart9?"+param, null, function(data) {
+                    if(isFirstTime){
+                        if(data.length>1){
+                            $("#analysis").show();
+                        }else if(data.length==1){
+                            $("#nav_analysis").remove();
+                            return;
+                        }
+                    }
+                    data[data.length-1].dataLabels={enabled:true, format:'{y}%'};
+                    $(".chart9_loading").remove();
+                    showChart(data);
+                });
+            }
+
+            $('.selectpicker1').on('hidden.bs.select', function (e) {
+                var time = $('#mySelectTime').selectpicker("val");
+                var city = $('#mySelectCity').selectpicker("val");
+                var lineStage = $('#mySelectStage').selectpicker("val");
+                var param = "startupId="+ startupId+"&time="+time+"&city="+city+"&lineStage="+lineStage;
+                getForm(param,false)
+            });
+
+            $("._collapseall").on("click",function(e){
+                e.preventDefault();
+                $("._extra_member").hide();
+                $(this).hide();
+                $(this).prev().show();
+            });
+            $("._expand_all").on("click",function(e){
+                e.preventDefault();
+                $("._extra_member").show();
+                $(this).hide();
+                $(this).next().show();
+            });
+
+            {
+                var chart = {
+                    marginBottom: '30'
+                };
+
+                var title = {
+                    text: null
+                };
+
+                var colorAxis = {
+                    minColor: '#FFFFFF',
+                    maxColor: Highcharts.getOptions().colors[0]
+                };
+                var credits={
+                    href:"http://www.evervc.com",
+                    text:"数据来源：天天投",
+                    position:{
+                        align: 'right',
+                        x: -10,
+                        verticalAlign: 'bottom',
+                        y: -5
+                    },
+                    style: {
+                        cursor: 'pointer',
+                        color: '#BBB',
+                        fontFamily:['Helvetica Neue','Helvetica','Arial','Microsoft Yahei','Hiragino Sans GB','Heiti SC','WenQuanYi Micro Hei','sans-serif'],
+                        fontSize: '10px'
+                    }
+                };
+                var series= [{
+                    type: 'treemap',
+                    layoutAlgorithm: 'squarified',
+                    allowPointSelect: false,
+                    enableMouseTracking: true,
+                    borderColor:'#FFF',
+                    borderWidth: 1,
+                    tooltip:{
+                        pointFormat:'<b>{point.name}</b>：共{point.value}起投资事件</b><br/>'
+                    },
+                    dataLabels:{
+                        style:{
+                            fontSize:'12px',
+                            fontWeight:'normal',
+                            fontFamily:['Helvetica Neue','Helvetica','Arial','Microsoft Yahei','Hiragino Sans GB','Heiti SC','WenQuanYi Micro Hei','sans-serif'],
+                            textShadow:null
+                        },
+                        formatter:function(){
+                            return this.point.name+'（'+this.point.value+'）';
+                        }
+                    },
+                    events: {
+                        click: function(e) {
+                            var cate = e.point.id;
+                            showChart8(cate);
+                        }
+                    }
+                }];
+                var json = {};
+                json.chart = chart;
+                json.title = title;
+                json.colorAxis = colorAxis;
+                json.credits = credits;
+                var getRandomColor = function(){
+                    return '#'+('00000'+(Math.random()*0x1000000<<0).toString(16)).substr(-6);
+                };
+                var colors = new Array();
+                var fillColors = function(){
+                    colors.unshift('#ddd9c4');
+                    colors.unshift('#dce6f1');
+                    colors.unshift('#d8e4bc');
+                    colors.unshift('#fabf8f');
+                    colors.unshift('#fde9d9');
+                    colors.unshift('#f2f2f2');
+                    colors.unshift('#e4dfec');
+                    colors.unshift('#b7dee8');
+                    colors.unshift('#c5d9f1');
+                    colors.unshift('#ebf1de');
+                    colors.unshift('#f2dcdb');
+                    colors.unshift('#fff1c3');
+                    colors.unshift('#95b3d7');
+
+                }
+                var getColor = function(){
+                    if(colors.length == 0){
+                        fillColors();
+                    }
+                    return colors.pop();
+                };
+                var stack = new Array();
+                function showChart8(cate){
+                    return $.ajax({
+                        url:"/api/chart8",
+                        type:"GET",
+                        data:{sid:85653,cate:cate},
+                        success:function(ret, textStatus){
+                            if(ret.length<2){
+                                return;
+                            }
+                            var data = new Array();
+                            $.each(ret,function(i, r){
+                                if(i>0 && r.num >0){
+                                    data.push({name: r.name,value: r.num,color: getColor(),id: r.id});
+                                }
+                            });
+                            if(data.length == 0 ){
+                                if(cate == 0){
+                                    $("#nav_layout").remove();
+                                    return;
+                                }else{
+                                }
+                                return;
+                            }
+                            $("#layout").show();
+                            series[0].data = data;
+                            json.series = series;
+                            $("#layout").show();
+                            if(cate == 0){
+                                $(".back").hide();
+                            }else{
+                                $(".back").show();
+                            }
+                            $(".chart8_loading").remove();
+                            $('#chart8').highcharts(json);
+                            stack.push(cate)
+                        }
+                    });
+                }
+
+                $(".back").click(function(e){
+                    e.preventDefault();
+                    stack.pop();
+                    var prev = stack.pop();
+                    showChart8(prev);
+                });
+
+                //约谈记录翻页
+                var page = 1;
+                var total = 2;
+                function getIntros(){
+                    $.ajax({
+                        url:'/api/vcfirms/'+85653+'/intros',
+                        type:'GET',
+                        data:{page:page},
+                        success:function(ret, textStatus){
+                            $('._intro_panel').html(ret);
+                            $("._intro_panel").find(".panel-body").fadeIn();
+                        }
+                    });
+                };
+                $('._intro_panel').on('click','.fa-chevron-left',function(e){
+                    e.preventDefault();
+                    if(page <= 1 ){
+                        page = 1;
+                        return;
+                    }
+                    page--;
+                    getIntros();
+                });
+                $('._intro_panel').on('click','.fa-chevron-right',function(e){
+                    e.preventDefault();
+                    if(page >= total){
+                        page = total;
+                        return;
+                    }
+                    page++;
+                    getIntros();
+                });
+            }
+
+
+            //关注
+            {
+                var btnFollow = $('#btnStartupProfileFollow');
+                var btnFollowing = $('#btnStartupProfileFollowing');
+                var params = {entityType: "Startup", entityId: startupId};
+
+                var setFollowState = function (isFollowed) {
+                    if (isFollowed) {
+                        btnFollow.hide();
+                        btnFollowing.show();
+                    } else {
+                        btnFollow.show();
+                        btnFollowing.hide();
+                    }
+                };
+
+                btnFollow.click(function (e) {
+                    e.preventDefault();
+                    if (!startupId || startupId == null || startupId.length == 0) {
+                        return;
+                    }
+                    $.ajax('/api/follows?'+ $.param(params,true), {
+                        type: "POST",
+                        success: function (res) {
+                            setFollowState(true);
+                        }
+                    });
+
+                });
+                btnFollowing.click(function (e) {
+                    e.preventDefault();
+                    if (!startupId || startupId == null || startupId.length == 0) {
+                        return;
+                    }
+                    $.ajax('/api/follows?'+ $.param(params,true), {
+                        type: "DELETE",
+                        success: function (res) {
+                            setFollowState(false);
+                        }
+                    });
+                });
+            }
+
+            //视频播放
+            {
+                var width = 598;
+                var height = 420;
+                $(".portfolio-video").on("click",function(){
+                    var videoUrl = $('#myModal-video .modal-body').data("url");
+                    var http_regex = /(https?:\/\/)/;
+                    if(!http_regex.test(videoUrl)){
+                        videoUrl = "http://" + videoUrl;
+                    }
+                    $.ajax("/api/videos/convert",{
+                        type: 'POST',
+                        data: {
+                            url    : videoUrl,
+                            width  : width,
+                            height : height
+                        },
+                        success: function (res) {
+                            if (!res || !res.text) {
+                                window.open(videoUrl);
+                                return;
+                            }
+                            $('#myModal-video').modal("show");
+                            var panelVideo = $('#myModal-video .modal-body');
+
+                            panelVideo.empty();
+
+                            var videoFrame = $(res.text);
+                            videoFrame.css('z-index',0);
+
+                            panelVideo.append(videoFrame);
+                        },
+                        async:false
+                    })
+                });
+
+                $('#myModal-video').on('hidden.bs.modal', function (e) {
+                    var panelVideo = $('#myModal-video .modal-body');
+                    panelVideo.empty();
+                })
+            }
+
+            //投资事件显示
+            var showFundevents = function(url){
+                if(url){
+                    $.get(url, function(html){
+                        $("#_fundevent_container").html(html);
+
+                    });
+                }
+            };
+
+            $("#_fundevent_container").on("click","._fundevent_pager",function(e){
+                e.preventDefault();
+                var href = $(this).data("url");
+                showFundevents(href);
+            });
+            $("#_fundevent_tags").on("click","li",function(e){
+                e.preventDefault();
+                $this = $(this);
+                if($this.hasClass("active")){
+                    return;
+                }
+                var href = $this.data("url");
+                $this.siblings().removeClass("active");
+                $this.addClass("active");
+                showFundevents(href);
+            });
+
+            //认领公司
+            {
+                var $myModal_reclaim = $('#myModal-reclaim');
+                var $formClaim = $myModal_reclaim.find('form');
+                var validateClaim = $formClaim.validate({
+                    debug: true,
+                    showErrors: function (errorMap, errorList) {
+                        // do nothing
+                    },
+                    rules: {
+                        name: {
+                            required: true
+                        },
+                        title: {
+                            required: true
+                        },
+                        mobile: {
+                            required: true
+                        },
+                        email: {
+                            required: false,
+                            email: true
+                        }
+                    }
+                });
+
+                $myModal_reclaim.on('click', '.btnPrimary', function (e) {
+                    e.preventDefault();
+
+                    var formData = $formClaim.serializeArray();
+
+                    if (!validateClaim.form()) {
+                        $(".alert").show();
+                        setTimeout(function () {
+                            $(".alert").fadeOut(2000);
+                        })
+                        return false;
+                    }
+                    $.ajax('/api/startups/' + startupId + '/claim_apply', {
+                        method: 'POST',
+                        data: $.param(formData, true),
+                        success: function (res) {
+                            $("._after_commit").each(function () {
+                                $(this).siblings().hide();
+                                $(this).show();
+                            })
+
+                        }
+                    });
+
+                });
+            }
+
+            //约谈
+            {
+                $("#myModal-interview").on("click",".btnPrimary",function(){
+                    $introNote = $("#_intro_note");
+                    if($introNote.val()==null || $introNote.val().length==0){
+                        $("#myModal-interview").find(".alert").slideDown();
+                        setTimeout(function(){
+                            $("#myModal-interview").find(".alert").slideUp();
+                        },3000);
+                        return;
+                    }
+                    $.ajax("/api/intros",{
+                        type:"POST",
+                        data:{
+                            startupId:startupId,
+                            note:$introNote.val()
+                        },
+                        success:function(){
+                            $("#myModal-interview").find("._intro_before").hide();
+                            $("#myModal-interview").find("._intro_after").show();
+                        },
+                        error:function(errorData){
+                            var errorObject = jQuery.parseJSON(errorData.responseText);
+                            $("#myModal-interview").find("._intro_before").hide();
+                            $("#myModal-interview").find("._intro_after").hide();
+                            $("#myModal-interview").find("._intro_error .modal-text").html(errorObject.errorDesc);
+                            $("#myModal-interview").find("._intro_error").show();
+                        }
+                    })
+                });
+                //当约谈窗口关闭之后还原内部样式
+                $('#myModal-interview').on('hidden.bs.modal', function (e) {
+                    $("#myModal-interview").find("._intro_before").show();
+                    $("#myModal-interview").find("._intro_after").hide();
+                    $("#myModal-interview").find("._intro_error").hide();
+                })
+            }
+
+            {
+                //换一换为项目点赞的人
+                $("#shuffleFollowers").click(function(e){
+                    e.preventDefault();
+                    $.ajax("/startup/randomFollowers",{
+                        type:"GET",
+                        data:{
+                            startupId:startupId,
+                            count:5
+                        },
+                        success:function(html){
+                            $("#followersContainer").html(html);
+                            $("#followersContainer").find(".media").fadeIn();
+                        }
+                    })
+                })
+            }
+
+            //展开收起隐藏项目
+            {
+                $(".expand_all").on("click",function(e){
+                    e.preventDefault();
+                    $this = $(this);
+                    $this.parents(".panel").find(".hidden_items").slideDown();
+                    $this.hide();
+                    $this.next().show();
+                })
+
+                $(".collapse_all").on("click",function(e){
+                    e.preventDefault();
+                    $this = $(this);
+                    $this.parents(".panel").find(".hidden_items").slideUp();
+                    $this.hide().prev().show();
+                })
+            }
+
+            {
+                //申请查看bp
+                $("#myModal-a_view").on("click",".btnPrimary",function(){
+                    $bpNote = $("#_bp_note");
+                    if($bpNote.val()==null || $bpNote.val().length==0){
+                        $("#myModal-a_view").find(".alert").slideDown();
+                        setTimeout(function(){
+                            $("#myModal-a_view").find(".alert").slideUp();
+                        },3000);
+                        return;
+                    }
+                    $.ajax('/api/planApplies',{
+                        type:"POST",
+                        data:{
+                            startupId:startupId,
+                            note:$bpNote.val()
+                        },
+                        success:function(){
+                            $("#myModal-a_view").find("._intro_before").hide();
+                            $("#myModal-a_view").find("._intro_after").show();
+                        }
+                    })
+                });
+                //当约谈窗口关闭之后还原内部样式
+                $('#myModal-a_view').on('hidden.bs.modal', function (e) {
+                    $("#myModal-a_view").find("._intro_before").show();
+                    $("#myModal-a_view").find("._intro_after").hide();
+                })
+            }
+
+            {
+                //导航滑动动画以及偏移解决
+                $("#navbar-example ul li a[href^='#']").on('click', function(e) {
+
+                    // prevent default anchor click behavior
+                    e.preventDefault()
+
+                    // store hash
+                    var hash = this.hash;
+                    var $this = $(this).parent();
+                    // animate
+                    $('html, body').animate({
+                        scrollTop: $(this.hash).offset().top -100
+                    }, 300, function(){
+                        window.location.hash = hash
+                    })
+                })
+            }
+
+            {
+                //媒体信息
+                var getAllImages = function (items) {
+                    var $btns = items;
+                    if ($btns.length == 0) {
+                        return;
+                    }
+                    var imageUrls = [];
+                    $.each($btns, function (i, btn) {
+                        var $btn = $(btn);
+                        imageUrls.push($btn.attr('href'));
+                    });
+                    return imageUrls;
+                };
+
+                var showFancyBox = function (e, images,currentImage) {
+                    e.preventDefault();
+
+                    var imageUrls = images;
+                    if (!imageUrls || imageUrls.length == 0) {
+                        return;
+                    }
+                    var currentUrl = currentImage.attr('data-value');
+                    var before = [];
+                    var showArray = [];
+                    $.each(imageUrls, function (i, url) {
+                        if (url == currentUrl) {
+                            showArray.push(url);
+                        } else {
+                            if (showArray.length > 0) {
+                                showArray.push(url);
+                            } else {
+                                before.push(url);
+                            }
+                        }
+                    });
+                    if (before.length > 0) {
+                        $.each(before, function (i, url) {
+                            showArray.push(url);
+                        });
+                    }
+
+                    if (showArray && showArray.length > 0) {
+                        $.fancybox.open(showArray, {
+                            type: 'image'
+                        });
+                    }
+                }
+
+                $(".carousel-inner").on('click','.img_product_screenshot_big_show',function(e){
+                    $this = $(this)
+                    showFancyBox(e,getAllImages($('.p_btn_product_pic_thumb')),$this);
+                });
+                $("#bp").on('click','.bp_images',function(e){
+                    $this = $(this)
+                    showFancyBox(e,getAllImages($('.bp_images_url')),$this);
+                });
+
+            }
+
+            var initPage = function(){
+                $(".selectpicker1").selectpicker();
+                //getForm("startupId="+ startupId , true);
+                showFundevents($("#_fundevent_container").data("url"));
+                if($(".user-wx-img") && $(".user-wx-img").eq(0).width()<30){
+                    $(".user-wx-pop").remove();
+                }
+                $.when( getForm("startupId="+ startupId , true) ).done(function(){
+                    $.when( showChart8(0) ).done(function(){
+                        var $nav_items = $("#navbar-example ul li");
+                        if($nav_items.length > 3){
+                            $("#navbar-example").parent().show();
+                            $scrollspy = $('body').scrollspy({ target: '#navbar-example',offset:100 });
+                        }
+                    })
+                });
+            };
+
+            initPage();
+
+
+        });
+  </script>
+ </head>
+ <body data-value="85653">
+  <div id="header">
+   <div class="navbar navbar-default navbar-fixed-top animated" id="navbar">
+    <div class="container-fluid">
+     <div class="navbar-header">
+      <a class="navbar-brand" href="/">
+       <img src="//pp1.evervc.com/zhuanti-imgs/evervc_logo_header.png" title="天天投 - 专业高效的免费投融资服务平台"/>
+      </a>
+     </div>
+     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+       <li>
+        <a href="/">
+         首页
+         <span class="menu-highlight">
+         </span>
+        </a>
+       </li>
+       <li>
+        <a href="/startups">
+         融资项目
+         <span class="menu-highlight">
+         </span>
+        </a>
+       </li>
+       <li class="dropdown ">
+        <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="/investors" role="button">
+         投资人
+         <span class="caret">
+         </span>
+         <span class="menu-highlight">
+         </span>
+        </a>
+        <ul class="dropdown-menu">
+         <li>
+          <a href="/investors">
+           投资人
+          </a>
+         </li>
+         <li>
+          <a href="/data_topvc">
+           投资机构
+          </a>
+         </li>
+        </ul>
+       </li>
+       <li>
+        <a href="/data">
+         创投数据
+         <span class="menu-highlight">
+         </span>
+        </a>
+       </li>
+       <li>
+        <a href="/elite/meetings">
+         创投活动
+         <span class="menu-highlight">
+         </span>
+        </a>
+       </li>
+       <li>
+        <a href="/create">
+         我要融资
+         <span class="menu-highlight">
+         </span>
+        </a>
+       </li>
+      </ul>
+      <form action="/search.html" class="navbar-form navbar-left" method="GET" role="search">
+       <div class="form-group">
+        <input autocomplete="off" class="form-control" name="keyword" placeholder="搜项目、投资人、事件等" type="text" value=""/>
+       </div>
+       <button class="btn btn-default" type="submit">
+        搜索
+       </button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+       <li class="dropdown">
+        <button class="btn btn-default navbar-btn btn-reg require-auth" type="button">
+         注册
+        </button>
+       </li>
+       <li class="dropdown">
+        <button class="btn btn-default navbar-btn btn-log require-auth" type="button">
+         登录
+        </button>
+       </li>
+      </ul>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script>
+   $(window).scroll(function(){
+        if ($(window).scrollTop()>100){
+            $(".navbar-fixed-top").addClass("fixed");
+        }
+        else
+        {
+            $(".navbar-fixed-top").removeClass("fixed");
+        }
+    });
+
+    var compareHeight=0,realHeight= 0,hideHeader=false;
+    $(window).scroll(function(){
+        realHeight = $(window).scrollTop();
+        if(realHeight<10){
+            $("#navbar").removeClass("fadeOutUp").addClass("fadeInDown");
+            compareHeight=realHeight;
+            return;
+        }
+        if (realHeight>=compareHeight){
+            compareHeight = realHeight;
+            hideHeader = true;
+        }
+        else
+        {
+            if(realHeight+80<compareHeight){
+                hideHeader = false;
+                compareHeight = realHeight;
+            }
+        }
+    });
+    var prevHideHeader = false;
+    setInterval(function(){
+        if(hideHeader!=prevHideHeader){
+            if(hideHeader){
+                $("#navbar").removeClass("fadeInDown").addClass("fadeOutUp");
+                prevHideHeader = hideHeader;
+            }else{
+                $("#navbar").removeClass("fadeOutUp").addClass("fadeInDown");
+                prevHideHeader = hideHeader;
+            }
+        }
+    },400)
+  </script>
+  <div class="container">
+   <div class="portfolio-header">
+    <div class="portfolio-cover">
+     <div class="container">
+      <ol class="breadcrumb">
+       <li>
+        <a href="/">
+         首页
+        </a>
+       </li>
+       <li>
+        <a href="/startups">
+         融资项目
+        </a>
+       </li>
+       <li class="active">
+        课外课管理平台
+       </li>
+      </ol>
+     </div>
+     <!-- 路径导航 -->
+     <div class="container">
+      <div class="portfolio-social">
+       <a class="portfolio-social-btn require-auth" data-target="#myModal-interview" data-toggle="modal" href="#">
+        <i class="fa fa-comments">
+        </i>
+        约谈
+       </a>
+       <a after-auth="refresh-do" class="portfolio-social-btn require-auth" href="#" id="btnStartupProfileFollowing" style="display: none;">
+        <i class="fa fa-star">
+        </i>
+        取消关注
+       </a>
+       <a after-auth="refresh-do" class="portfolio-social-btn require-auth" href="#" id="btnStartupProfileFollow">
+        <i class="fa fa-star-o">
+        </i>
+        关注
+       </a>
+       <a class="portfolio-social-btn" data-target="#myModal-share" data-toggle="modal" href="#">
+        <i class="fa fa-wechat">
+        </i>
+        分享
+       </a>
+      </div>
+     </div>
+    </div>
+    <div class="portfolio-row">
+     <div class="container">
+      <div class="main-row">
+       <div class="portfolio-user-photo">
+        <img alt="课外课管理平台" src="//pp1.evervc.com/2017/05/10/4a1165ef933b437cb2765796bbeb35d8.png@!msgs"/>
+       </div>
+       <div class="portfolio-user-info">
+        <h1>
+         课外课管理平台
+        </h1>
+        <div class="portfolio-user-bio">
+         <span class="fa fa-info-circle fa-fw">
+         </span>
+         <span class="text">
+          教育培训机构的SaaS
+         </span>
+        </div>
+        <div class="portfolio-user-tag">
+         <span class="fa fa-flag fa-fw">
+         </span>
+         北京
+         <em>
+          /
+         </em>
+         天使轮
+         <em>
+          /
+         </em>
+         已上线
+        </div>
+        <div class="portfolio-user-tag">
+         <span class="fa fa-tag fa-fw">
+         </span>
+         <a class="label label-default" href="/data_detail?cate=3908" target="_blank">
+          教育
+         </a>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="main-row">
+    <div class="col-md-left bggay">
+     <div class="panel panel-default" id="intro">
+      <div class="panel-heading">
+       <span class="fa fa-th-list">
+       </span>
+       项目介绍
+      </div>
+      <div class="panel-body">
+       <!-- 轮播图片 ↓ -->
+       <div class="portfolio-slide">
+        <div class="carousel slide" data-ride="carousel" id="carousel-example-generic">
+         <div class="carousel-inner" role="listbox">
+          <div class="item active">
+           <a class="p_btn_product_pic_thumb" href="http://pp1.evervc.com/2017/05/10/0110665bae40462586fcd887eb8571bb.png">
+            <img class="img_product_screenshot_big_show" data-value="http://pp1.evervc.com/2017/05/10/0110665bae40462586fcd887eb8571bb.png" src="http://pp1.evervc.com/2017/05/10/0110665bae40462586fcd887eb8571bb.png"/>
+           </a>
+          </div>
+          <div class="item ">
+           <a class="p_btn_product_pic_thumb" href="http://pp1.evervc.com/2017/05/10/5b1e96e63cff435895a3337083edb9c6.png">
+            <img class="img_product_screenshot_big_show" data-value="http://pp1.evervc.com/2017/05/10/5b1e96e63cff435895a3337083edb9c6.png" src="http://pp1.evervc.com/2017/05/10/5b1e96e63cff435895a3337083edb9c6.png"/>
+           </a>
+          </div>
+         </div>
+         <ol class="carousel-indicators">
+          <li class="active" data-slide-to="0" data-target="#carousel-example-generic">
+           <img src="//pp1.evervc.com/2017/05/10/0110665bae40462586fcd887eb8571bb.png"/>
+          </li>
+          <li data-slide-to="1" data-target="#carousel-example-generic">
+           <img src="//pp1.evervc.com/2017/05/10/5b1e96e63cff435895a3337083edb9c6.png"/>
+          </li>
+         </ol>
+         <a class="left carousel-control" data-slide="prev" href="#carousel-example-generic" role="button">
+          <span aria-hidden="true" class="fa fa-chevron-left">
+          </span>
+          <span class="sr-only">
+           上一张
+          </span>
+         </a>
+         <a class="right carousel-control" data-slide="next" href="#carousel-example-generic" role="button">
+          <span aria-hidden="true" class="fa fa-chevron-right">
+          </span>
+          <span class="sr-only">
+           下一张
+          </span>
+         </a>
+        </div>
+       </div>
+       <!-- 文字介绍 ↓ -->
+       <div class="portfolio-text">
+        课外课管理平台，能够帮助培训学校实现从咨询、报名、充值、排课、考勤、财务、积分、进销存、报表管理等一系列功能的简单高效的专业化管理系统，为培训学校提供全套的管理解决方案。
+       </div>
+       <!-- 项目亮点 ↓ -->
+       <div class="portfolio-light">
+        <div class="title">
+         项目亮点
+        </div>
+        <p>
+         （1）创始人在培训行业耕耘多年，对行业的痛点和如何解决，有很深刻的理解。（2）融资用于优化系统，开拓市场。（3）有意向投资的机构，可以先发邮件到35304022@qq.com，提交投资计划书，内容包括机构的资金规模、投资案例、对本项目的理解、预计投资金额、期望占股比例（此处谨慎，关系到是否接受贵机构投资的关键）、能够为公司带来哪些资源等等。公司有专人审阅投资计划书，请静候佳音。（4）小机构或者投资咨询机构，请绕行，请见谅。
+        </p>
+       </div>
+       <!-- 公司信息 ↓ -->
+       <div class="portfolio-corp">
+        <div class="corp-name">
+         北京鲲鹏鼎力技术有限公司
+        </div>
+        <!-- 只显示公司简介 ↓ -->
+        <p>
+         北京鲲鹏鼎力技术有限公司2014年成立，专注培训机构管理软件的开发。
+         <br/>
+         <br/>
+         课外课智能教务管理系统，包括教务客户端、老师APP和学员App，专注解决琴行管理的问题，包括排课，调课，考勤，工资计算等工作实现自动化处理，帮助琴行跨越互联网鸿沟，提升琴行业的整体效率和竞争力。
+        </p>
+       </div>
+      </div>
+     </div>
+     <div class="panel panel-default" id="team">
+      <div class="panel-heading">
+       <em>
+        共 2 位团队成员
+       </em>
+       <span class="fa fa-users">
+       </span>
+       团队介绍
+      </div>
+      <div class="panel-body portfolio">
+       <div class="row">
+        <div class="media startups-member">
+         <div class="media-left">
+          <a href="/person/203158" target="_blank">
+           <img alt="张军浦" class="media-object" src="//pp1.evervc.com/2017/05/10/00f8bbcd33264e2691c7506af7acd1f3.jpg@!logom"/>
+          </a>
+         </div>
+         <div class="media-body">
+          <a href="/person/203158" target="_blank">
+           <h4 class="media-heading">
+            张军浦
+           </h4>
+           <p class="title">
+            总经理
+           </p>
+           <p class="desc">
+            出色的销售业绩
+     曾供职于数码视讯，担任市场总监职位。
+丰富的教务管理经验
+     任职北京莺谷文化艺术发展有限公司，七年教务管理经验。
+           </p>
+          </a>
+         </div>
+        </div>
+        <div class="media startups-member">
+         <div class="media-left">
+          <img alt="吴云" class="media-object" src="//pp1.evervc.com/default-photo2.jpg@!logom"/>
+         </div>
+         <div class="media-body">
+          <h4 class="media-heading">
+           吴云
+          </h4>
+          <p class="title">
+           技术经理
+          </p>
+          <p class="desc">
+          </p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="panel panel-default" id="bp">
+      <div class="panel-heading">
+       <div class="panel-heading-left">
+        <span class="fa fa-image">
+        </span>
+        商业计划
+       </div>
+      </div>
+      <div class="panel-body startups">
+       <div class="row text-center no-content">
+        <span class="fa fa-lock fa-3x">
+        </span>
+        <p>
+         商业计划仅投资人可见
+        </p>
+        <p>
+         <a class="a_view require-auth" href="#">
+          投资人身份认证 »
+         </a>
+        </p>
+       </div>
+      </div>
+     </div>
+     <div class="panel panel-default" id="analysis" style="display:none">
+      <div class="panel-heading">
+       <div class="panel-heading-left">
+        <span class="fa fa-bar-chart">
+        </span>
+        课外课管理平台投资分析图
+       </div>
+       <div class="panel-heading-right portfolio" id="_chart9_options">
+        <div class="dropdown event-dropdown charts">
+         <select class="selectpicker1" id="mySelectTime" name="time" title="按时间">
+          <option value="0">
+           全部
+          </option>
+          <option value="1">
+           2016年Q1
+          </option>
+          <option value="2">
+           2016年上半年
+          </option>
+          <option value="3">
+           2015年
+          </option>
+          <option value="4">
+           2014年
+          </option>
+          <option value="5">
+           2013年
+          </option>
+         </select>
+         <select class="selectpicker1" id="mySelectCity" name="city" title="按城市">
+          <option value="0">
+           全部
+          </option>
+          <option value="20069">
+           北京
+          </option>
+          <option value="20070">
+           上海
+          </option>
+          <option value="20072">
+           广州
+          </option>
+          <option value="20071">
+           深圳
+          </option>
+          <option value="20075">
+           成都
+          </option>
+          <option value="20074">
+           杭州
+          </option>
+         </select>
+         <select class="selectpicker1" id="mySelectStage" name="lineStage" title="按阶段">
+          <option value="0">
+           全部
+          </option>
+          <option value="1">
+           种子轮
+          </option>
+          <option value="2">
+           天使轮
+          </option>
+          <option value="3">
+           Pre-A轮
+          </option>
+          <option value="4">
+           A轮
+          </option>
+          <option value="5">
+           B轮
+          </option>
+          <option value="6">
+           C轮
+          </option>
+          <option value="7">
+           D轮
+          </option>
+          <option value="8">
+           E轮
+          </option>
+          <option value="9">
+           F轮
+          </option>
+          <option value="10">
+           PreIPO
+          </option>
+          <option value="11">
+           IPO及以后
+          </option>
+          <option value="12">
+           战略投资
+          </option>
+          <option value="13">
+           被收购
+          </option>
+          <option value="14">
+           其他
+          </option>
+         </select>
+        </div>
+       </div>
+      </div>
+      <div class="panel-body" id="container_analysis" style="width:890px;height:440px">
+       <div class="row text-center no-content chart9_loading" style="line-height: 340px">
+        <span class="fa fa-spinner fa-spin fa-3x">
+        </span>
+       </div>
+      </div>
+     </div>
+     <div class="panel panel-default" id="layout" style="display:none">
+      <div class="panel-heading">
+       <div class="panel-heading-left">
+        <span class="fa fa-pie-chart">
+        </span>
+        课外课管理平台投资版图
+       </div>
+       <div class="panel-heading-right">
+        <button class="btn btn-default btn-sm back" type="button">
+         <i class="fa fa-angle-double-left">
+         </i>
+         返回
+        </button>
+       </div>
+      </div>
+      <div class="panel-body" id="chart8" style="height:440px">
+       <div class="row text-center no-content chart8_loading" style="line-height: 340px">
+        <span class="fa fa-spinner fa-spin fa-3x">
+        </span>
+       </div>
+      </div>
+     </div>
+     <div class="panel panel-default" id="timeline">
+      <div class="panel-heading">
+       <span class="fa fa-flag">
+       </span>
+       发展历程
+      </div>
+      <div class="panel-body portfolio">
+       <ul class="user-press">
+        <li>
+         <span class="dot">
+         </span>
+         <span>
+          课外课微信版本上线。
+         </span>
+         <p>
+          2016.08
+         </p>
+        </li>
+        <li>
+         <span class="dot">
+         </span>
+         <span>
+          课外课机构用户突破100家。
+         </span>
+         <p>
+          2016.01
+         </p>
+        </li>
+        <li>
+         <span class="dot">
+         </span>
+         <span>
+          课外课APP上线。
+         </span>
+         <p>
+          2015.09
+         </p>
+        </li>
+        <li>
+         <span class="dot">
+         </span>
+         <span>
+          课外课管理平台WEB端试运营。
+         </span>
+         <p>
+          2015.06
+         </p>
+        </li>
+        <li>
+         <span class="dot">
+         </span>
+         <span>
+          成功完成50万天使轮投资。
+         </span>
+         <p>
+          2015.03
+         </p>
+        </li>
+        <li>
+         <span class="dot">
+         </span>
+         <span>
+          组建技术团队，开发课外课管理平台。
+         </span>
+         <p>
+          2015.03
+         </p>
+        </li>
+        <li>
+         <span class="dot">
+         </span>
+         <span>
+          北京鲲鹏鼎力技术有限公司成立。
+         </span>
+         <p>
+          2014.12
+         </p>
+        </li>
+       </ul>
+      </div>
+     </div>
+    </div>
+    <div class="col-md-right bggay">
+     <div class="panel panel-default">
+      <div class="panel-heading">
+       融资信息
+      </div>
+      <div class="panel-body portfolio">
+       <div class="row text-center amount">
+        <h2>
+         ￥5,000
+         <em>
+          万
+         </em>
+        </h2>
+        <h5>
+         融资金额
+        </h5>
+       </div>
+      </div>
+     </div>
+     <div class="panel panel-default _intro_panel">
+      <div class="panel-heading">
+       <em>
+        共 8 人约谈
+       </em>
+       约谈记录
+      </div>
+      <div class="panel-body portfolio">
+       <div class="media">
+        <a href="/person/203392">
+         <div class="media-left">
+          <img alt="贾建龙" class="media-object" src="//pp1.evervc.com/2017/05/20/53e3fa6befe9474b82401c78265d5072.jpg@!logom"/>
+         </div>
+         <div class="media-body">
+          <h5 class="media-heading">
+           贾建龙
+          </h5>
+          <p>
+           视源股份 投资总监
+          </p>
+         </div>
+        </a>
+       </div>
+       <div class="media">
+        <a href="/person/98059">
+         <div class="media-left">
+          <img alt="王健" class="media-object" src="//pp1.evervc.com/2017/01/16/fa480c0d9f2046c7b4e2a8c1bc671aec.jpg@!logom"/>
+         </div>
+         <div class="media-body">
+          <h5 class="media-heading">
+           王健
+          </h5>
+          <p>
+           领势投资 合伙人
+          </p>
+         </div>
+        </a>
+       </div>
+       <div class="media">
+        <a href="/person/96066">
+         <div class="media-left">
+          <img alt="马翔" class="media-object" src="//pp1.evervc.com/2016/10/13/38d28cff8d20467fb3616e76187be9b2.jpg@!logom"/>
+         </div>
+         <div class="media-body">
+          <h5 class="media-heading">
+           马翔
+          </h5>
+          <p>
+           大同资本 投资总监
+          </p>
+         </div>
+        </a>
+       </div>
+       <div class="media">
+        <a href="/person/100598">
+         <div class="media-left">
+          <img alt="Liz徐蓉" class="media-object" src="//pp1.evervc.com/2017/02/08/4397e4eb15f44c8db3f5b2b9e8e54720.jpg@!logom"/>
+         </div>
+         <div class="media-body">
+          <h5 class="media-heading">
+           Liz徐蓉
+          </h5>
+          <p>
+           天使湾创投 投资分析师
+          </p>
+         </div>
+        </a>
+       </div>
+       <div class="media">
+        <a href="/person/206814">
+         <div class="media-left">
+          <img alt="俞爽" class="media-object" src="//pp1.evervc.com/2017/10/13/9ed20f904bf048fcaf9b293391261f31.jpg@!logom"/>
+         </div>
+         <div class="media-body">
+          <h5 class="media-heading">
+           俞爽
+          </h5>
+          <p>
+           安徽一带一路投资有限公司 项目总监
+          </p>
+         </div>
+        </a>
+       </div>
+       <!-- 以上内容左右切换，小于等于5条记录就不显示下面的切换按钮 ↑ -->
+       <div class="row text-center">
+        <span class="btn-arrows fa fa-chevron-left disabled">
+        </span>
+        <span class="btn-arrows fa fa-chevron-right ">
+        </span>
+       </div>
+      </div>
+     </div>
+     <div class="panel panel-default">
+      <div class="panel-heading">
+       相似领域项目
+      </div>
+      <div class="panel-body portfolio">
+       <div class="media">
+        <a href="/startups/87480">
+         <div class="media-left">
+          <img alt="英知（上海）教育科技有限公司" class="media-object" src="//pp1.evervc.com/2017/08/17/567bdb7b983b4ef593ec2daf533f5657.jpg@!logosf"/>
+         </div>
+         <div class="media-body">
+          <h5 class="media-heading">
+           英知（上海）教育科技有限公司
+          </h5>
+          <p>
+           教育
+          </p>
+         </div>
+        </a>
+       </div>
+       <div class="media">
+        <a href="/startups/86674">
+         <div class="media-left">
+          <img alt="留学问多点" class="media-object" src="//pp1.evervc.com/2017/07/06/769c034c483d4820b3513d7c8b7a91de.png@!logosf"/>
+         </div>
+         <div class="media-body">
+          <h5 class="media-heading">
+           留学问多点
+          </h5>
+          <p>
+           教育
+          </p>
+         </div>
+        </a>
+       </div>
+       <div class="media">
+        <a href="/startups/86396">
+         <div class="media-left">
+          <img alt="德国人才引入项目" class="media-object" src="//pp1.evervc.com/2017/06/23/db8bcf100bc24b2abdcd2b290d2c7c4e.jpg@!logosf"/>
+         </div>
+         <div class="media-body">
+          <h5 class="media-heading">
+           德国人才引入项目
+          </h5>
+          <p>
+           教育
+                                                     / 
+                                            微软
+          </p>
+         </div>
+        </a>
+       </div>
+       <div class="media">
+        <a href="/startups/85925">
+         <div class="media-left">
+          <img alt="100满分教育" class="media-object" src="//pp1.evervc.com/2017/05/25/9d42552bcd414d48a18075ab37bfe13b.png@!logosf"/>
+         </div>
+         <div class="media-body">
+          <h5 class="media-heading">
+           100满分教育
+          </h5>
+          <p>
+           教育
+          </p>
+         </div>
+        </a>
+       </div>
+       <div class="media">
+        <a href="/startups/85428">
+         <div class="media-left">
+          <img alt="语焉" class="media-object" src="//pp1.evervc.com/2017/04/28/8aadbc0e6a7b449a91a6b55664cdf059.PNG@!logosf"/>
+         </div>
+         <div class="media-body">
+          <h5 class="media-heading">
+           语焉
+          </h5>
+          <p>
+           教育
+                                                     / 
+                                            新浪
+          </p>
+         </div>
+        </a>
+       </div>
+      </div>
+     </div>
+     <div class="panel panel-default">
+      <div class="panel-heading">
+       <em>
+        <a href="#" id="shuffleFollowers">
+         <i class="fa fa-refresh">
+         </i>
+         换一换
+        </a>
+       </em>
+       为项目点赞的
+      </div>
+      <div class="panel-body portfolio" id="followersContainer">
+       <div class="media">
+        <a href="/person/63891" target="_blank">
+         <div class="media-left">
+          <img alt="金炜" class="media-object" src="//pp1.evervc.com/2016/03/20/720962e6d5204f108c3099228af3c939.jpg@!logom"/>
+         </div>
+         <div class="media-body">
+          <h5 class="media-heading">
+           金炜
+          </h5>
+          <p>
+           中路资本 副总裁
+          </p>
+         </div>
+        </a>
+       </div>
+       <div class="media">
+        <a href="/person/203392" target="_blank">
+         <div class="media-left">
+          <img alt="贾建龙" class="media-object" src="//pp1.evervc.com/2017/05/20/53e3fa6befe9474b82401c78265d5072.jpg@!logom"/>
+         </div>
+         <div class="media-body">
+          <h5 class="media-heading">
+           贾建龙
+          </h5>
+          <p>
+           视源股份 投资总监
+          </p>
+         </div>
+        </a>
+       </div>
+       <div class="media">
+        <a href="/person/98059" target="_blank">
+         <div class="media-left">
+          <img alt="王健" class="media-object" src="//pp1.evervc.com/2017/01/16/fa480c0d9f2046c7b4e2a8c1bc671aec.jpg@!logom"/>
+         </div>
+         <div class="media-body">
+          <h5 class="media-heading">
+           王健
+          </h5>
+          <p>
+           领势投资 合伙人
+          </p>
+         </div>
+        </a>
+       </div>
+       <div class="media">
+        <a href="/person/96066" target="_blank">
+         <div class="media-left">
+          <img alt="马翔" class="media-object" src="//pp1.evervc.com/2016/10/13/38d28cff8d20467fb3616e76187be9b2.jpg@!logom"/>
+         </div>
+         <div class="media-body">
+          <h5 class="media-heading">
+           马翔
+          </h5>
+          <p>
+           大同资本 投资总监
+          </p>
+         </div>
+        </a>
+       </div>
+       <div class="media">
+        <a href="/person/100598" target="_blank">
+         <div class="media-left">
+          <img alt="Liz徐蓉" class="media-object" src="//pp1.evervc.com/2017/02/08/4397e4eb15f44c8db3f5b2b9e8e54720.jpg@!logom"/>
+         </div>
+         <div class="media-body">
+          <h5 class="media-heading">
+           Liz徐蓉
+          </h5>
+          <p>
+           天使湾创投 投资分析师
+          </p>
+         </div>
+        </a>
+       </div>
+      </div>
+     </div>
+     <div class="panel panel-default">
+      <div class="panel-heading">
+       联系信息
+      </div>
+      <div class="panel-body portfolio">
+       <dl class="user-contact">
+        <dt>
+         <i class="fa fa-link" title="官网">
+         </i>
+        </dt>
+        <dd>
+         <span>
+          <a href="http://www.kykapp.com" target="_blank">
+           http://www.kykapp.com
+          </a>
+         </span>
+        </dd>
+        <dt>
+         <i class="fa fa-wechat fa-fw" title="微信公众号">
+         </i>
+        </dt>
+        <dd>
+         <span class="user-wx-pop">
+          <img class="user-wx-img" src="//open.weixin.qq.com/qr/code/?username=kykapp"/>
+         </span>
+         <span class="user-wx">
+          kykapp
+         </span>
+        </dd>
+        <dt>
+         <i class="fa fa-map fa-fw" title="地址">
+         </i>
+        </dt>
+        <dd>
+         <span>
+          <em>
+           北京市海淀区京仪国家创新企业孵化器C座315
+          </em>
+         </span>
+        </dd>
+       </dl>
+      </div>
+     </div>
+     <div class="panel panel-default">
+      <div class="panel-body portfolio">
+       <div class="row text-center">
+        <img class="qrcode" src="/qrcode?url=http%3A%2F%2Fwww.evervc.com%2Fstartups%2F85653"/>
+        <p>
+         扫描二维码
+         <br/>
+         将 “课外课管理平台” 分享给
+         <br/>
+         微信好友或朋友圈
+        </p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <!-- 快捷导航挂件 ↓ -->
+   <div class="main-row" style="display:none">
+    <!-- 等eddy检查样式 -->
+    <div class="float-nav" id="navbar-example">
+     <ul class="nav" id="guide">
+      <li id="nav_intro" style="display:block">
+       <a href="#intro" style="padding:0">
+        <i class="fa fa-th-list fa-fw">
+        </i>
+        <span>
+         项目介绍
+        </span>
+       </a>
+      </li>
+      <li id="nav_team" style="display:block">
+       <a href="#team" style="padding:0">
+        <i class="fa fa-users fa-fw">
+        </i>
+        <span>
+         团队介绍
+        </span>
+       </a>
+      </li>
+      <li id="nav_bp" style="display:block">
+       <a href="#bp" style="padding:0">
+        <i class="fa fa-file-text fa-fw">
+        </i>
+        <span>
+         商业计划
+        </span>
+       </a>
+      </li>
+      <li id="nav_analysis" style="display:block">
+       <a href="#analysis" style="padding:0">
+        <i class="fa fa-bar-chart fa-fw">
+        </i>
+        <span>
+         投资分析
+        </span>
+       </a>
+      </li>
+      <li id="nav_layout" style="display:block">
+       <a href="#layout" style="padding:0">
+        <i class="fa fa-pie-chart fa-fw">
+        </i>
+        <span>
+         投资版图
+        </span>
+       </a>
+      </li>
+      <li id="nav_timeline" style="display:block">
+       <a href="#timeline" style="padding:0">
+        <i class="fa fa-flag fa-fw">
+        </i>
+        <span>
+         发展历程
+        </span>
+       </a>
+      </li>
+     </ul>
+    </div>
+   </div>
+  </div>
+  <!-- 页脚 -->
+  <!-- 页面底部 -->
+  <div id="footer">
+   <div class="footer-main">
+    <div class="col-logo">
+    </div>
+    <div class="col-links">
+     <p>
+      <a href="/about.html">
+       关于天天投
+      </a>
+      &gt;
+      <a href="/about.html#contact">
+       联系我们
+      </a>
+      <a href="/about.html#media">
+       媒体报道
+      </a>
+      <a href="/about.html#links">
+       友情链接
+      </a>
+      <a href="/joinus.html" target="_blank">
+       加入我们
+      </a>
+     </p>
+     <p class="copy">
+      © 2014-2016 EverVC.com All rights reserved.
+      <a href="http://www.miibeian.gov.cn/" target="_blank">
+       蜀ICP备13000316号-2
+      </a>
+     </p>
+    </div>
+    <div class="col-tip" style="float: right;">
+     <p>
+     </p>
+     <p>
+      成都添砖加瓦科技有限公司  版权所有
+     </p>
+    </div>
+   </div>
+  </div>
+  <div class="model" id="g_dialog_confirm" style="display:none">
+   <div class="dialog">
+    <p class="colorLine">
+    </p>
+    <h1>
+     <spann id="g_dialog_confirm_title">
+      标题
+     </spann>
+     <span class="close" id="g_dialog_confirm_btn_close">
+     </span>
+    </h1>
+    <div class="dialog-content">
+     <p class="ac" id="g_dialog_confirm_content">
+      内容
+     </p>
+    </div>
+    <div class="dialog_action">
+     <span>
+      <a class="leftBtn" href="#" id="g_dialog_confirm_btn_ok">
+       确定发布
+      </a>
+     </span>
+     <span>
+      <a class="rightBtn" href="#" id="g_dialog_confirm_btn_cancel">
+       取消
+      </a>
+     </span>
+    </div>
+   </div>
+  </div>
+  <div class="popTips" style="display: none;">
+   <!-- 操作成功提示，显示2秒后自动渐隐消失 -->
+   <div class="pop_Tip">
+    <p class="iconOk3">
+     <img alt="" src="/images/icon_ok3.png"/>
+    </p>
+    <p class="info">
+     保存成功
+    </p>
+   </div>
+  </div>
+  <script type="text/javascript">
+   var _py = _py || [];
+_py.push(['a', 'O8.._NR2uRzQlNPkJ-Clph0g00']);
+_py.push(['domain','stats.ipinyou.com']);
+_py.push(['e','']);
+-function(d) {
+	var s = d.createElement('script'),
+	e = d.body.getElementsByTagName('script')[0]; e.parentNode.insertBefore(s, e),
+	f = 'https:' == location.protocol;
+	s.src = (f ? 'https' : 'http') + '://'+(f?'fm.ipinyou.com':'fm.p0y.cn')+'/j/adv.js';
+}(document);
+  </script>
+  <noscript>
+   &lt; img src="//stats.ipinyou.com/adv.gif?a=O8.._NR2uRzQlNPkJ-Clph0g00&amp;e=" style="display:none;"/&gt;
+  </noscript>
+  <!-- 弹窗：微信分享 ↓ -->
+  <div class="modal fade in" id="myModal-share" style="display: none;">
+   <div class="modal-dialog modal-dialog-md">
+    <div class="modal-content">
+     <div class="modal-header">
+      <button class="close" data-dismiss="modal" type="button">
+       <span aria-hidden="true" title="关闭">
+        ×
+       </span>
+       <span class="sr-only">
+        关闭
+       </span>
+      </button>
+      <h4 class="modal-title">
+       分享到微信
+      </h4>
+     </div>
+     <div class="modal-body">
+      <p>
+       <img src="/qrcode?url=http%3A%2F%2Fwww.evervc.com%2Fstartups%2F85653"/>
+      </p>
+      <p>
+       扫描二维码
+       <br/>
+       将 “课外课管理平台” 分享给微信好友或朋友圈
+      </p>
+     </div>
+     <div class="modal-footer">
+      <button class="btn btnDefault" data-dismiss="modal" type="button">
+       取消
+      </button>
+     </div>
+    </div>
+   </div>
+  </div>
+  <!-- 弹窗：播放视频 ↓ -->
+  <div class="modal fade in" id="myModal-video" style="display: none;">
+   <div class="modal-dialog modal-dialog-md">
+    <div class="modal-content">
+     <div class="modal-header">
+      <button class="close" data-dismiss="modal" type="button">
+       <span aria-hidden="true" title="关闭">
+        ×
+       </span>
+       <span class="sr-only">
+        关闭
+       </span>
+      </button>
+      <h4 class="modal-title">
+       正在播放：课外课管理平台
+      </h4>
+     </div>
+     <div class="modal-body" data-url="">
+     </div>
+    </div>
+   </div>
+  </div>
+  <!-- 弹窗：认领公司 -->
+  <div class="modal" id="myModal-reclaim" style="display: none;">
+   <div class="modal-dialog modal-dialog-md">
+    <div class="modal-content">
+     <div class="modal-header">
+      <button class="close" data-dismiss="modal" type="button">
+       <span aria-hidden="true" title="关闭">
+        ×
+       </span>
+       <span class="sr-only">
+        关闭
+       </span>
+      </button>
+      <h4 class="modal-title">
+       认领公司
+      </h4>
+     </div>
+     <div class="modal-body">
+      <!-- 填单前 ↓ -->
+      <form class="form-horizontal model-form" id="_claim_form">
+       <div class="alert alert-danger alert-dismissible fade in" role="alert" style="display:none">
+        <!--  显示2秒后自动消失 -->
+        <p>
+         请完整填写以下内容后再提交！
+        </p>
+       </div>
+       <div class="form-group">
+        <label class="col-sm-2 control-label">
+         真实姓名
+        </label>
+        <div class="col-sm-10">
+         <input class="form-control" name="name" placeholder="你的真实姓名" type="text"/>
+        </div>
+       </div>
+       <div class="form-group">
+        <label class="col-sm-2 control-label">
+         担任职务
+        </label>
+        <div class="col-sm-10">
+         <input class="form-control" name="title" placeholder="你在该公司担任的职务" type="text"/>
+        </div>
+       </div>
+       <div class="form-group">
+        <label class="col-sm-2 control-label">
+         手机号码
+        </label>
+        <div class="col-sm-10">
+         <input class="form-control" name="mobile" placeholder="你的有效手机号码" type="text"/>
+        </div>
+       </div>
+       <div class="form-group">
+        <label class="col-sm-2 control-label">
+         常用邮箱
+        </label>
+        <div class="col-sm-10">
+         <input class="form-control" name="email" placeholder="你的常用邮箱地址" type="text"/>
+        </div>
+       </div>
+      </form>
+      <!-- 填单后 ↓ -->
+      <div class="row _after_commit" style="display: none;">
+       <span class="fa fa-check-circle fa-5x">
+       </span>
+       <h4>
+        认领申请已提交！
+       </h4>
+       <h5>
+        我们的工作人员会尽快处理你的认领申请，请耐心等候。
+       </h5>
+      </div>
+     </div>
+     <div class="modal-footer">
+      <button class="btn btnDefault _after_commit" data-dismiss="modal" style="display: none;" type="button">
+       我知道了
+      </button>
+      <button class="btn btnDefault" data-dismiss="modal" type="button">
+       取消
+      </button>
+      <button class="btn btnPrimary" type="button">
+       确定认领
+      </button>
+     </div>
+    </div>
+   </div>
+  </div>
+  <!-- 弹窗：约谈 ↓ -->
+  <div class="modal fade in" id="myModal-interview" style="display: none;">
+   <div class="modal-dialog modal-dialog-md">
+    <div class="modal-content">
+     <div class="modal-header">
+      <button class="close" data-dismiss="modal" type="button">
+       <span aria-hidden="true" title="关闭">
+        ×
+       </span>
+       <span class="sr-only">
+        关闭
+       </span>
+      </button>
+      <h4 class="modal-title">
+       发起约谈：课外课管理平台
+      </h4>
+     </div>
+     <div class="modal-body _intro_before">
+      <!-- 填单前 ↓ -->
+      <form class="form-horizontal model-form" id="intro_form">
+       <div class="alert alert-danger alert-dismissible fade in" role="alert" style="display: none;">
+        <p>
+         请填写内容后再提交！
+        </p>
+       </div>
+       <textarea class="form-control" id="_intro_note" placeholder="请简述你的约谈意向" rows="5"></textarea>
+      </form>
+     </div>
+     <div class="modal-footer _intro_before">
+      <button class="btn btnDefault" data-dismiss="modal" type="button">
+       取消
+      </button>
+      <button class="btn btnPrimary" type="button">
+       发送
+      </button>
+     </div>
+     <div class="modal-body _intro_after" style="display:none">
+      <!-- 填单后 ↓ -->
+      <div class="row">
+       <span class="fa fa-check-circle fa-5x">
+       </span>
+       <h4>
+        约谈发送成功！
+       </h4>
+       <h5 style="line-height: 22px;color: #666;">
+        请使用天天投APP查看对方的回复状态
+        <br/>
+        若尚未安装天天投APP请点击下面的按钮下载体验
+       </h5>
+       <!-- 立即下载按钮意义不明 -->
+       <button class="btn btn-primary btn-lg" onclick="location.href='//www.evervc.com/topic/app.html'" style="padding:0 100px;margin-bottom: 30px;" type="button">
+        立即下载
+       </button>
+      </div>
+     </div>
+     <div class="modal-footer _intro_after" style="display: none;">
+      <button class="btn btnDefault" data-dismiss="modal" type="button">
+       我知道了
+      </button>
+      <!-- 约谈发送成功后只显示这个按钮 -->
+     </div>
+     <!-- 约谈次数限制 ↓ -->
+     <div class="modal-body _intro_error" style="display:none">
+      <div class="row ">
+       <span class="fa fa-info-circle fa-3x">
+       </span>
+       <p class="modal-text">
+        很抱歉，为了避免对被约谈对象造成过多的干扰，约谈行为每天只能进行5次
+        <br/>
+        你可于明天再次尝试。
+       </p>
+      </div>
+     </div>
+     <div class="modal-footer _intro_error" style="display: none;">
+      <button class="btn btnDefault" data-dismiss="modal" type="button">
+       我知道了
+      </button>
+      <!-- 约谈发送成功后只显示这个按钮 -->
+     </div>
+    </div>
+   </div>
+  </div>
+  <!-- 弹窗：申请查看BP ↓ -->
+  <div class="modal fade in" id="myModal-a_view" style="display: none;">
+   <div class="modal-dialog modal-dialog-md">
+    <div class="modal-content">
+     <div class="modal-header">
+      <button class="close" data-dismiss="modal" type="button">
+       <span aria-hidden="true" title="关闭">
+        ×
+       </span>
+       <span class="sr-only">
+        关闭
+       </span>
+      </button>
+      <h4 class="modal-title">
+       申请查看商业计划书
+      </h4>
+     </div>
+     <div class="modal-body _intro_before">
+      <!-- 填单前 ↓ -->
+      <form class="form-horizontal model-form">
+       <div class="alert alert-danger alert-dismissible fade in" role="alert" style="display: none;">
+        <p>
+         请填写内容后再提交！
+        </p>
+       </div>
+       <textarea class="form-control" id="_bp_note" placeholder="请填写你的申请意向" rows="5"></textarea>
+      </form>
+     </div>
+     <div class="modal-footer _intro_before">
+      <button class="btn btnDefault" data-dismiss="modal" type="button">
+       取消
+      </button>
+      <button class="btn btnPrimary" type="button">
+       发送
+      </button>
+     </div>
+     <div class="modal-body _intro_after" style="display:none">
+      <!-- 填单后 ↓ -->
+      <div class="row">
+       <span class="fa fa-check-circle fa-5x">
+       </span>
+       <h4>
+        申请发送成功！
+       </h4>
+       <h5 style="line-height: 22px;color: #666;">
+        对方通过你的申请后即可查看，请耐心等待
+       </h5>
+      </div>
+     </div>
+     <div class="modal-footer _intro_after" style="display:none">
+      <button class="btn btnDefault" data-dismiss="modal" type="button">
+       我知道了
+      </button>
+      <!-- 约谈发送成功后只显示这个按钮 -->
+     </div>
+    </div>
+   </div>
+  </div>
+  <!-- 页面漂浮挂件 -->
+  <!-- 弹窗：提交建议或反馈 -->
+  <div class="modal div-feedback" style="display: none;">
+   <div class="modal-dialog modal-dialog-md">
+    <div class="modal-content">
+     <div class="modal-header">
+      <button class="close" data-dismiss="modal" type="button">
+       <span aria-hidden="true" title="关闭">
+        ×
+       </span>
+       <span class="sr-only">
+        关闭
+       </span>
+      </button>
+      <h4 class="modal-title">
+       提交建议或反馈
+      </h4>
+     </div>
+     <div class="modal-body">
+      <!-- 填单前 ↓ -->
+      <form class="form-horizontal model-form form-feedback">
+       <div class="alert alert-danger alert-dismissible fade in" role="alert" style="display: none">
+        <p>
+         请填写内容后再提交！
+        </p>
+       </div>
+       <p class="modal-text">
+        感谢你为我们提供建议或反馈！
+       </p>
+       <textarea class="form-control" name="content" placeholder="请尽量客观详细的描述你的问题" rows="5"></textarea>
+      </form>
+      <!-- 填单后 ↓ -->
+      <div class="row div-feedback-success" style="display: none;">
+       <span class="fa fa-check-circle fa-5x">
+       </span>
+       <h4>
+        你的反馈已提交成功！
+       </h4>
+       <h5 style="line-height: 22px;">
+        再次感谢你对天天投的关注
+        <br/>
+        若需更多的了解我们请关注天天投微信公众号 “evervc”。
+       </h5>
+      </div>
+     </div>
+     <div class="modal-footer">
+      <button class="btn btnDefault button-cancel-feedback" data-dismiss="modal" type="button">
+       取消
+      </button>
+      <button class="btn btnPrimary submit-feedback" type="button">
+       提交
+      </button>
+     </div>
+    </div>
+   </div>
+  </div>
+  <!-- 页面漂浮挂件 -->
+  <div class="float-toolbar">
+   <a href="/create" title="创建项目">
+    <i class="fa fa-plus">
+    </i>
+   </a>
+   <a class="f-qr" href="/topic/app.html">
+    <i class="fa fa-mobile fa-2x">
+    </i>
+    <span class="qr">
+     <img src="//pp1.evervc.com/zhuanti-imgs/qr_ever_vc.jpg?2"/>
+     <p>
+      天天投手机客户端
+     </p>
+    </span>
+   </a>
+   <a class="a-feedback" href="javascript:void">
+    <span>
+     建议
+     <br/>
+     反馈
+    </span>
+    <!-- 点击是建议反馈的弹窗 -->
+   </a>
+   <a href="javascript:void" title="返回顶部">
+    <i class="fa fa-chevron-up">
+    </i>
+   </a>
+  </div>
+  <script>
+   // footer
+    $(".a-feedback").on("click",function(e){
+        e.preventDefault();
+        $(".div-feedback").show();
+        $(".div-feedback-success").hide();
+        $(".form-feedback").show();
+        //绑定关闭
+        $(".div-feedback").find(".close").on("click",function(e){
+            e.preventDefault();
+            $(".div-feedback").hide();
+        });
+        //绑定提交
+        //防止重复提交机制 ajax提交前加锁 ajax请求返回时解锁
+        var lock = false;
+        $(".submit-feedback").on("click",function(){
+            e.preventDefault();
+            var content = $(".form-feedback").find("textarea[name='content']").val();
+            if(!content || content.length == 0){
+                $(".alert-dismissible").fadeIn();
+                setTimeout(function(){
+                    $(".alert-dismissible").fadeOut();
+                },2000)
+                return;
+            }
+            if(lock){
+                return;
+            }
+            lock = true;
+            $.ajax({url:'/api/feedbacks',
+                type:'POST',
+                data:{item:0,type:"fromIndex",content:content},
+                success:function(){
+                    $(".form-feedback").resetForm().hide();
+                    $(".div-feedback-success").show();
+                    $(".button-cancel-feedback").html("我知道了");
+                    $(".submit-feedback").hide();
+                    lock = false;
+                },
+                error:function(){
+                    //错误处理
+                    lock = false;
+                }
+            });
+        });
+        //绑定取消
+        $(".button-cancel-feedback").on("click",function(e){
+            e.preventDefault();
+            $(".div-feedback").hide();
+        });
+    });
+
+    //返回顶部的效果和功能
+    $(".fa-chevron-up").parent().hide();
+    $(window).scroll(function(){
+        if ($(window).scrollTop()>100){
+            $(".fa-chevron-up").parent().fadeIn(500);
+        }
+        else
+        {
+            $(".fa-chevron-up").parent().fadeOut(500);
+        }
+    });
+    $(".fa-chevron-up").click(function(e){
+        e.preventDefault();
+        $('body,html').animate({scrollTop:0},500);
+        return false;
+    });
+
+    //TODO
+  </script>
+ </body>
+</html>
